@@ -8,11 +8,11 @@ size_t maxSeq(int * array, size_t n){
     int maxSeqLen = 1;
     int curSeqLen = 1;
     int * curValP = array;
-    int * lastVal = array;
+    int * lastValP = array;
     for (int i = 1; i < n; i++){
-        curVal = array + i;
-        lastVal = curVal - 1
-        if (*curVal > *lastVal){
+        curValP = array + i;
+        lastValP = curValP - 1;
+        if (*curValP > *lastValP){
             curSeqLen++;
             if (curSeqLen > maxSeqLen){
                 maxSeqLen = curSeqLen;
