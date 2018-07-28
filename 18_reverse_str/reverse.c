@@ -14,6 +14,9 @@ void reverse(char * str) {
   char * pntr1 = str;
   char * pntr2 = str + len - 1;
   for (int i = 0; i < half_len; i++){
+      if (pntr1 - pntr2 <= 0) {
+          break;
+      }
       pntrSwap(pntr1, pntr2);
       pntr1++;
       pntr2--;
