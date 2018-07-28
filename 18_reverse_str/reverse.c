@@ -2,8 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 
+void pntrSwap(char * pntr1, char * pntr2){
+    char temp = * pntr1;
+    *pntr1 = *pntr2;
+    *pntr2 = temp;
+}
+
 void reverse(char * str) {
-  //WRITE ME!
+  size_t len = strlen(str);
+  size_t half_len = len/2;
+  char * pntr1 = str;
+  char * pntr2 = str + len - 1;
+  for (int i = 0; i < half_len; i++){
+      pntrSwap(pntr1, pntr2);
+      pntr1++;
+      pntr2--;
+  }
 }
 
 int main(void) {
