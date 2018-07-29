@@ -6,7 +6,7 @@ void rotate(char matrix[10][10]){
     char temp_mat[10][10];
     for (int row = 0; row < 10; row++) {
         for (int col = 0; col < 10; col++) {
-            temp_mat[row][col] = matrix[col][9 - row];
+            temp_mat[row][col] = matrix[9 - col][row];
         }
     }
     for (int row = 0; row < 10; row++) {
