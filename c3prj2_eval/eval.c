@@ -110,6 +110,9 @@ int is_n_length_staright_at(deck_t * hand, size_t index, suit_t fs, int n) {
     card_t ** cards_ptr = hand -> cards;
     size_t size = hand -> n_cards;
     
+    if ((*(cards_ptr + index)) -> suit != fs) {
+        return EXIT_FAILURE;
+    } 
     unsigned last_val = (**(cards_ptr + index)).value;
     unsigned cur_val = last_val;
     suit_t cur_suit = (**(cards_ptr + index)).suit;
@@ -146,24 +149,48 @@ int is_n_length_staright_at(deck_t * hand, size_t index, suit_t fs, int n) {
 int is_ace_low_straight_at(deck_t * hand, size_t index, suit_t fs) {
     card_t ** card_ptr = hand -> cards;
     
-    card_t want_ace;
-    want_ace.suit = fs;
-    want_ace.value = 14;
-    int cond = 0;
-    if ((**(card_ptr + index)).value == 5) {
-        cond = is_n_length_staright_at(hand, index, fs, 4);
-        if (fs != NUM_SUITS) {
-            if (cond == EXIT_SUCCESS && deck_contains(hand, want_ace)){
-                return EXIT_SUCCESS;
+    card_t test_card = **card_ptr;
+    if ((*(card_ptr + index)) -> value != VALUE_ACE) {
+        return EXIT_FAILURE;
+    }
+    if (fs != NUM_SUITS && ((*(card_ptr + index)) -> suit != fs)) {
+        return EXIT_FAILURE;
+    }
+    
+    for (size_t i = 0; i < (hand -> n_cards); i++) {
+        test_card = **(card_ptr + i);
+        if (test_card.value == 5) {
+            if (fs != NUM_SUITS) {
+                if (test_card.suit == fs) {
+                    return is_n_length_staright_at(hand, i, fs, 4);
+                }
             }
-        }
-        else {
-            if (cond == EXIT_SUCCESS && (**card_ptr).value == 14) {
-                return EXIT_SUCCESS;
+            else {
+                return is_n_length_staright_at(hand, i, fs, 4);
             }
         }
     }
     return EXIT_FAILURE;
+
+
+//    card_t want_ace;
+//    want_ace.suit = fs;
+//    want_ace.value = 14;
+//    int cond = 0;
+//    if ((**(card_ptr + index)).value == 5) {
+//        cond = is_n_length_staright_at(hand, index, fs, 4);
+//        if (fs != NUM_SUITS) {
+//            if (cond == EXIT_SUCCESS && deck_contains(hand, want_ace)){
+//                return EXIT_SUCCESS;
+//            }
+//        }
+//        else {
+//            if (cond == EXIT_SUCCESS && (**card_ptr).value == 14) {
+//                return EXIT_SUCCESS;
+//            }
+//        }
+//    }
+//    return EXIT_FAILURE;
 }
 
 int is_straight_at(deck_t * hand, size_t index, suit_t fs) {
