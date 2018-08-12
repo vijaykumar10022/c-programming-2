@@ -110,7 +110,7 @@ int is_n_length_staright_at(deck_t * hand, size_t index, suit_t fs, int n) {
     card_t ** cards_ptr = hand -> cards;
     size_t size = hand -> n_cards;
     
-    if ((*(cards_ptr + index)) -> suit != fs) {
+    if (fs != NUM_SUITS && (*(cards_ptr + index)) -> suit != fs) {
         return EXIT_FAILURE;
     } 
     unsigned last_val = (**(cards_ptr + index)).value;
