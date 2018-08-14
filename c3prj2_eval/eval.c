@@ -73,11 +73,21 @@ ssize_t  find_secondary_pair(deck_t * hand,
 //    size_t indx_pre = get_match_index(match_counts, match_idx + 1, 2);
     unsigned match_val = *(match_counts + match_idx);
     if (match_idx > 0) {
-        first = get_match_index(match_counts, match_idx, 2);
+        if (get_match_index(match_counts, match_idx, 2) <= get_match_index(match_counts, match_idx, 3)) {
+            first = get_match_index(match_counts, match_idx, 2);
+        }
+        else {
+            first = get_match_index(match_counts, match_idx, 3);
+        }
     }
     
     if (match_idx + (size_t)match_val < size){
-        second = get_match_index((match_counts + (unsigned)match_idx +  match_val), size - match_idx - match_val, 2);
+        if (get_match_index((match_counts + (unsigned)match_idx +  match_val), size - match_idx - match_val, 2) <= get_match_index((match_counts + (unsigned)match_idx +  match_val), size - match_idx - match_val, 3)) {
+            second = get_match_index((match_counts + (unsigned)match_idx +  match_val), size - match_idx - match_val, 2);
+        }
+        else {
+            second = get_match_index((match_counts + (unsigned)match_idx +  match_val), size - match_idx - match_val, 3);
+        }
     }
     if (second != -1) {
         second = second + match_idx + (size_t)match_val;
