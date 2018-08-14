@@ -221,21 +221,39 @@ hand_eval_t build_hand_from_match(deck_t * hand,
     hand_eval_t ans;
     ans.ranking = what;
     card_t ** dk_card_ptr = hand -> cards;
-    
-    unsigned uidx = (unsigned)idx;
+    card_t cur_card = **dk_card_ptr;
+    unsigned n_k_val = (**(dk_card_ptr + idx)).value;
+
+//    unsigned uidx = (unsigned)idx;
     unsigned delta_ptr = 0;
-    for (unsigned i = 0; i < n; i++) {
-        *(ans.cards + i) = *(dk_card_ptr + uidx + i);
+    
+    while (delta_ptr < n) {
+        *(ans.cards + delta_ptr) = *(dk_card_ptr + idx + delta_ptr);
+        delta_ptr++;
     }
-    for (unsigned j = 0; j < 5 - n; j++) {
-        if (j < uidx) {
-            delta_ptr = j;
+
+
+    while (delta_ptr < 5) {
+        cur_card = **dk_card_ptr;
+        if (cur_card.value != n_k_val) {
+            *(ans.cards + delta_ptr) = *(dk_card_ptr);
+            delta_ptr++;
         }
-        else {
-            delta_ptr = uidx + n + j;
-        }
-        *(ans.cards + n + j) = *(dk_card_ptr + delta_ptr);
+        dk_card_ptr++;
     }
+    
+//    for (unsigned i = 0; i < n; i++) {
+//        *(ans.cards + i) = *(dk_card_ptr + uidx + i);
+//    }
+//    for (unsigned j = 0; j < 5 - n; j++) {
+//        if (j < uidx) {
+//            delta_ptr = j;
+//        }
+//        else {
+//            delta_ptr = uidx + n + j;
+//        }
+//        *(ans.cards + n + j) = *(dk_card_ptr + delta_ptr);
+//    }
     return ans;
 }
 
