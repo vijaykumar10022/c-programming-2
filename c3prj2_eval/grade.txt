@@ -1,4 +1,4 @@
-Grading at Tue Aug 14 11:12:10 UTC 2018
+Grading at Tue Aug 14 12:13:11 UTC 2018
 Compiling your code
 rm test poker cards.o my-test-main.o *~
 Makefile:10: recipe for target 'clean' failed
@@ -6,57 +6,57 @@ cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o cards.o cards.c
 gcc -o test-eval -ggdb3 deck.o deck-c4.o eval-c4.o eval.o test-eval.o cards.o input.o future.o
 Testcase 1: Trying hands with nothing
 Valgrind returned an error status
-==677== Memcheck, a memory error detector
-==677== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==677== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==677== Command: ./test-eval inp.1.txt
-==677== Parent PID: 676
-==677== 
-==677== Invalid read of size 8
-==677==    at 0x401AEF: build_hand_from_match (eval.c:237)
-==677==    by 0x40255C: evaluate_hand (eval.c:440)
-==677==    by 0x402944: describe_hand (test-eval.c:68)
-==677==    by 0x402B6F: main (test-eval.c:116)
-==677==  Address 0x520a308 is 0 bytes after a block of size 40 alloc'd
-==677==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==677==    by 0x40103A: add_card_to (deck-c4.c:29)
-==677==    by 0x403309: hand_from_string (input.c:49)
-==677==    by 0x402AF4: main (test-eval.c:110)
-==677== 
-==677== Invalid read of size 8
-==677==    at 0x401AF2: build_hand_from_match (eval.c:237)
-==677==    by 0x40255C: evaluate_hand (eval.c:440)
-==677==    by 0x402944: describe_hand (test-eval.c:68)
-==677==    by 0x402B6F: main (test-eval.c:116)
-==677==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==677== 
-==677== 
-==677== Process terminating with default action of signal 11 (SIGSEGV): dumping core
-==677==  Access not within mapped region at address 0x0
-==677==    at 0x401AF2: build_hand_from_match (eval.c:237)
-==677==    by 0x40255C: evaluate_hand (eval.c:440)
-==677==    by 0x402944: describe_hand (test-eval.c:68)
-==677==    by 0x402B6F: main (test-eval.c:116)
-==677==  If you believe this happened as a result of a stack
-==677==  overflow in your program's main thread (unlikely but
-==677==  possible), you can try to increase the size of the
-==677==  main thread stack using the --main-stacksize= flag.
-==677==  The main thread stack size used in this run was 8388608.
-==677== 
-==677== HEAP SUMMARY:
-==677==     in use at exit: 864 bytes in 16 blocks
-==677==   total heap usage: 202 allocs, 186 frees, 12,472 bytes allocated
-==677== 
-==677== LEAK SUMMARY:
-==677==    definitely lost: 0 bytes in 0 blocks
-==677==    indirectly lost: 0 bytes in 0 blocks
-==677==      possibly lost: 0 bytes in 0 blocks
-==677==    still reachable: 864 bytes in 16 blocks
-==677==         suppressed: 0 bytes in 0 blocks
-==677== Rerun with --leak-check=full to see details of leaked memory
-==677== 
-==677== For counts of detected and suppressed errors, rerun with: -v
-==677== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==976== Memcheck, a memory error detector
+==976== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==976== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==976== Command: ./test-eval inp.1.txt
+==976== Parent PID: 975
+==976== 
+==976== Invalid read of size 8
+==976==    at 0x401B06: build_hand_from_match (eval.c:237)
+==976==    by 0x402566: evaluate_hand (eval.c:437)
+==976==    by 0x40294E: describe_hand (test-eval.c:68)
+==976==    by 0x402B79: main (test-eval.c:116)
+==976==  Address 0x520a308 is 0 bytes after a block of size 40 alloc'd
+==976==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==976==    by 0x40103A: add_card_to (deck-c4.c:29)
+==976==    by 0x403313: hand_from_string (input.c:49)
+==976==    by 0x402AFE: main (test-eval.c:110)
+==976== 
+==976== Invalid read of size 8
+==976==    at 0x401B09: build_hand_from_match (eval.c:237)
+==976==    by 0x402566: evaluate_hand (eval.c:437)
+==976==    by 0x40294E: describe_hand (test-eval.c:68)
+==976==    by 0x402B79: main (test-eval.c:116)
+==976==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==976== 
+==976== 
+==976== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==976==  Access not within mapped region at address 0x0
+==976==    at 0x401B09: build_hand_from_match (eval.c:237)
+==976==    by 0x402566: evaluate_hand (eval.c:437)
+==976==    by 0x40294E: describe_hand (test-eval.c:68)
+==976==    by 0x402B79: main (test-eval.c:116)
+==976==  If you believe this happened as a result of a stack
+==976==  overflow in your program's main thread (unlikely but
+==976==  possible), you can try to increase the size of the
+==976==  main thread stack using the --main-stacksize= flag.
+==976==  The main thread stack size used in this run was 8388608.
+==976== 
+==976== HEAP SUMMARY:
+==976==     in use at exit: 864 bytes in 16 blocks
+==976==   total heap usage: 202 allocs, 186 frees, 12,472 bytes allocated
+==976== 
+==976== LEAK SUMMARY:
+==976==    definitely lost: 0 bytes in 0 blocks
+==976==    indirectly lost: 0 bytes in 0 blocks
+==976==      possibly lost: 0 bytes in 0 blocks
+==976==    still reachable: 864 bytes in 16 blocks
+==976==         suppressed: 0 bytes in 0 blocks
+==976== Rerun with --leak-check=full to see details of leaked memory
+==976== 
+==976== For counts of detected and suppressed errors, rerun with: -v
+==976== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Testcase 2: Trying hands with pairs
  Checking the output 
 Your file matched the expected output
