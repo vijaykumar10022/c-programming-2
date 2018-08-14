@@ -259,11 +259,13 @@ hand_eval_t build_hand_from_match(deck_t * hand,
 
 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
-    size_t hand_sz = hand1 -> n_cards;
     
-    qsort(hand1 -> cards, hand_sz, sizeof(card_t), card_ptr_comp);
-    qsort(hand2 -> cards, hand_sz, sizeof(card_t), card_ptr_comp);
-    
+    size_t hand1_sz = hand1 -> n_cards;
+    size_t hand2_sz = hand2 -> n_cards;
+
+    qsort(hand1 -> cards, hand1_sz, sizeof(card_t), card_ptr_comp);
+    qsort(hand2 -> cards, hand2_sz, sizeof(card_t), card_ptr_comp);
+
     hand_eval_t hand1_val = evaluate_hand(hand1); 
     hand_eval_t hand2_val = evaluate_hand(hand2);
     
