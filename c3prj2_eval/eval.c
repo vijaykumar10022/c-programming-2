@@ -232,14 +232,14 @@ hand_eval_t build_hand_from_match(deck_t * hand,
         delta_ptr++;
     }
 
-
+    int count = 0;
     while (delta_ptr < 5) {
-        cur_card = **dk_card_ptr;
+        cur_card = **(dk_card_ptr + count);
         if (cur_card.value != n_k_val) {
-            *(ans.cards + delta_ptr) = *(dk_card_ptr);
+            *(ans.cards + delta_ptr) = *(dk_card_ptr + count);
             delta_ptr++;
         }
-        dk_card_ptr++;
+        count++;
     }
     
 //    for (unsigned i = 0; i < n; i++) {
@@ -260,11 +260,8 @@ hand_eval_t build_hand_from_match(deck_t * hand,
 
 int compare_hands(deck_t * hand1, deck_t * hand2) {
     
-    size_t hand1_sz = hand1 -> n_cards;
-    size_t hand2_sz = hand2 -> n_cards;
-
-    qsort(hand1 -> cards, hand1_sz, sizeof(card_t), card_ptr_comp);
-    qsort(hand2 -> cards, hand2_sz, sizeof(card_t), card_ptr_comp);
+    qsort(hand1 -> cards, hand1 -> n_cards, sizeof(hand1 -> cards[0]), card_ptr_comp);
+    qsort(hand2 -> cards, hand2 -> n_cards, sizeof(hand2 -> cards[0]), card_ptr_comp);
 
     hand_eval_t hand1_val = evaluate_hand(hand1); 
     hand_eval_t hand2_val = evaluate_hand(hand2);
