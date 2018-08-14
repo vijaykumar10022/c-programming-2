@@ -228,7 +228,7 @@ hand_eval_t build_hand_from_match(deck_t * hand,
         *(ans.cards + i) = *(dk_card_ptr + uidx + i);
     }
     for (unsigned j = 0; j < 5 - n; j++) {
-        if (j <= uidx) {
+        if (j < uidx) {
             delta_ptr = j;
         }
         else {
