@@ -1,221 +1,141 @@
-Grading at Tue Aug 14 10:41:33 UTC 2018
+Grading at Tue Aug 14 10:49:25 UTC 2018
 Compiling your code
 rm test poker cards.o my-test-main.o *~
 Makefile:10: recipe for target 'clean' failed
 cc -ggdb3 -Wall -Werror -pedantic -std=gnu99   -c -o cards.o cards.c
 gcc -o test-eval -ggdb3 deck.o deck-c4.o eval-c4.o eval.o test-eval.o cards.o input.o future.o
 Testcase 1: Trying hands with nothing
- Checking the output 
-Your file matched the expected output
- - Testcase passed
+Valgrind returned an error status
+==401== Memcheck, a memory error detector
+==401== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==401== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==401== Command: ./test-eval inp.1.txt
+==401== Parent PID: 400
+==401== 
+==401== Invalid read of size 8
+==401==    at 0x401AEF: build_hand_from_match (eval.c:237)
+==401==    by 0x40254A: evaluate_hand (eval.c:438)
+==401==    by 0x402932: describe_hand (test-eval.c:68)
+==401==    by 0x402B5D: main (test-eval.c:116)
+==401==  Address 0x520a308 is 0 bytes after a block of size 40 alloc'd
+==401==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==401==    by 0x40103A: add_card_to (deck-c4.c:29)
+==401==    by 0x4032F7: hand_from_string (input.c:49)
+==401==    by 0x402AE2: main (test-eval.c:110)
+==401== 
+==401== Invalid read of size 8
+==401==    at 0x401AF2: build_hand_from_match (eval.c:237)
+==401==    by 0x40254A: evaluate_hand (eval.c:438)
+==401==    by 0x402932: describe_hand (test-eval.c:68)
+==401==    by 0x402B5D: main (test-eval.c:116)
+==401==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==401== 
+==401== 
+==401== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==401==  Access not within mapped region at address 0x0
+==401==    at 0x401AF2: build_hand_from_match (eval.c:237)
+==401==    by 0x40254A: evaluate_hand (eval.c:438)
+==401==    by 0x402932: describe_hand (test-eval.c:68)
+==401==    by 0x402B5D: main (test-eval.c:116)
+==401==  If you believe this happened as a result of a stack
+==401==  overflow in your program's main thread (unlikely but
+==401==  possible), you can try to increase the size of the
+==401==  main thread stack using the --main-stacksize= flag.
+==401==  The main thread stack size used in this run was 8388608.
+==401== 
+==401== HEAP SUMMARY:
+==401==     in use at exit: 864 bytes in 16 blocks
+==401==   total heap usage: 202 allocs, 186 frees, 12,472 bytes allocated
+==401== 
+==401== LEAK SUMMARY:
+==401==    definitely lost: 0 bytes in 0 blocks
+==401==    indirectly lost: 0 bytes in 0 blocks
+==401==      possibly lost: 0 bytes in 0 blocks
+==401==    still reachable: 864 bytes in 16 blocks
+==401==         suppressed: 0 bytes in 0 blocks
+==401== Rerun with --leak-check=full to see details of leaked memory
+==401== 
+==401== For counts of detected and suppressed errors, rerun with: -v
+==401== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Testcase 2: Trying hands with pairs
 Valgrind returned an error status
-==166== Memcheck, a memory error detector
-==166== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==166== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==166== Command: ./test-eval inp.2.txt
-==166== Parent PID: 165
-==166== 
-==166== Invalid read of size 8
-==166==    at 0x40148B: card_ptr_comp (eval.c:9)
-==166==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==166==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==166==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==166==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==166==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==166==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==166==    by 0x4E7369E: qsort_r (msort.c:297)
-==166==    by 0x401BA1: compare_hands (eval.c:247)
-==166==    by 0x402B26: main (test-eval.c:124)
-==166==  Address 0x5207518 is 0 bytes after a block of size 40 alloc'd
-==166==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==166==    by 0x40103A: add_card_to (deck-c4.c:29)
-==166==    by 0x40324B: hand_from_string (input.c:49)
-==166==    by 0x402B0F: main (test-eval.c:123)
-==166== 
-==166== Invalid read of size 4
-==166==    at 0x40148E: card_ptr_comp (eval.c:9)
-==166==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==166==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==166==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==166==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==166==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==166==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==166==    by 0x4E7369E: qsort_r (msort.c:297)
-==166==    by 0x401BA1: compare_hands (eval.c:247)
-==166==    by 0x402B26: main (test-eval.c:124)
-==166==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==166== 
-==166== 
-==166== Process terminating with default action of signal 11 (SIGSEGV): dumping core
-==166==  Access not within mapped region at address 0x0
-==166==    at 0x40148E: card_ptr_comp (eval.c:9)
-==166==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==166==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==166==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==166==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==166==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==166==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==166==    by 0x4E7369E: qsort_r (msort.c:297)
-==166==    by 0x401BA1: compare_hands (eval.c:247)
-==166==    by 0x402B26: main (test-eval.c:124)
-==166==  If you believe this happened as a result of a stack
-==166==  overflow in your program's main thread (unlikely but
-==166==  possible), you can try to increase the size of the
-==166==  main thread stack using the --main-stacksize= flag.
-==166==  The main thread stack size used in this run was 8388608.
-==166== 
-==166== HEAP SUMMARY:
-==166==     in use at exit: 880 bytes in 17 blocks
-==166==   total heap usage: 56 allocs, 39 frees, 9,768 bytes allocated
-==166== 
-==166== LEAK SUMMARY:
-==166==    definitely lost: 0 bytes in 0 blocks
-==166==    indirectly lost: 0 bytes in 0 blocks
-==166==      possibly lost: 0 bytes in 0 blocks
-==166==    still reachable: 880 bytes in 17 blocks
-==166==         suppressed: 0 bytes in 0 blocks
-==166== Rerun with --leak-check=full to see details of leaked memory
-==166== 
-==166== For counts of detected and suppressed errors, rerun with: -v
-==166== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==406== Memcheck, a memory error detector
+==406== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==406== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==406== Command: ./test-eval inp.2.txt
+==406== Parent PID: 405
+==406== 
+==406== Invalid read of size 8
+==406==    at 0x40148B: card_ptr_comp (eval.c:9)
+==406==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==406==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==406==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==406==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==406==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==406==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==406==    by 0x4E7369E: qsort_r (msort.c:297)
+==406==    by 0x401BFC: compare_hands (eval.c:265)
+==406==    by 0x402BD2: main (test-eval.c:124)
+==406==  Address 0x5207518 is 0 bytes after a block of size 40 alloc'd
+==406==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==406==    by 0x40103A: add_card_to (deck-c4.c:29)
+==406==    by 0x4032F7: hand_from_string (input.c:49)
+==406==    by 0x402BBB: main (test-eval.c:123)
+==406== 
+==406== Invalid read of size 4
+==406==    at 0x40148E: card_ptr_comp (eval.c:9)
+==406==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==406==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==406==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==406==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==406==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==406==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==406==    by 0x4E7369E: qsort_r (msort.c:297)
+==406==    by 0x401BFC: compare_hands (eval.c:265)
+==406==    by 0x402BD2: main (test-eval.c:124)
+==406==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==406== 
+==406== 
+==406== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==406==  Access not within mapped region at address 0x0
+==406==    at 0x40148E: card_ptr_comp (eval.c:9)
+==406==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==406==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==406==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==406==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==406==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==406==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==406==    by 0x4E7369E: qsort_r (msort.c:297)
+==406==    by 0x401BFC: compare_hands (eval.c:265)
+==406==    by 0x402BD2: main (test-eval.c:124)
+==406==  If you believe this happened as a result of a stack
+==406==  overflow in your program's main thread (unlikely but
+==406==  possible), you can try to increase the size of the
+==406==  main thread stack using the --main-stacksize= flag.
+==406==  The main thread stack size used in this run was 8388608.
+==406== 
+==406== HEAP SUMMARY:
+==406==     in use at exit: 880 bytes in 17 blocks
+==406==   total heap usage: 56 allocs, 39 frees, 9,768 bytes allocated
+==406== 
+==406== LEAK SUMMARY:
+==406==    definitely lost: 0 bytes in 0 blocks
+==406==    indirectly lost: 0 bytes in 0 blocks
+==406==      possibly lost: 0 bytes in 0 blocks
+==406==    still reachable: 880 bytes in 17 blocks
+==406==         suppressed: 0 bytes in 0 blocks
+==406== Rerun with --leak-check=full to see details of leaked memory
+==406== 
+==406== For counts of detected and suppressed errors, rerun with: -v
+==406== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Testcase 3: Trying hands with 2 pairs
  Checking the output 
 Your file matched the expected output
  - Testcase passed
 Testcase 4: Trying hands with 3 of a kind
  Checking the output 
-Line_8_did_not_match
-Line_16_did_not_match
-Line_28_did_not_match
-Line_36_did_not_match
-Line_39_did_not_match
-Line_48_did_not_match
-Line_56_did_not_match
-Line_68_did_not_match
-Line_76_did_not_match
-Your file did not match the expected ouput
- - Output did not match, testcase failed
-Hand 1:								Hand 1:
---------							--------
-Qc Qd Qh 7c 5h 2c 						Qc Qd Qh 7c 5h 2c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 0 / value Q)	 - The most of a kind is 3 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh 7c 5h 		      |	 - 5 cards used for hand: Qc Qd Qh Qc 5h 
-Hand 2:								Hand 2:
---------							--------
-Jc Jd Jh 7c 5h 2c 						Jc Jd Jh 7c 5h 2c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 0 / value J)	 - The most of a kind is 3 of a kind (at index 0 / value J)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Jc Jd Jh 7c 5h 		      |	 - 5 cards used for hand: Jc Jd Jh Jc 5h 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 1 wins!							Hand 1 wins!
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-Qc Qd Qh 7c 5h 2c 						Qc Qd Qh 7c 5h 2c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 0 / value Q)	 - The most of a kind is 3 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh 7c 5h 		      |	 - 5 cards used for hand: Qc Qd Qh Qc 5h 
-Hand 2:								Hand 2:
---------							--------
-Qc Qd Qh 8c 5h 2c 						Qc Qd Qh 8c 5h 2c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 0 / value Q)	 - The most of a kind is 3 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh 8c 5h 		      |	 - 5 cards used for hand: Qc Qd Qh Qc 5h 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 2 wins!						      |	Tie
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-Qc Qd Qh 7c 5h 2c 						Qc Qd Qh 7c 5h 2c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 0 / value Q)	 - The most of a kind is 3 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh 7c 5h 		      |	 - 5 cards used for hand: Qc Qd Qh Qc 5h 
-Hand 2:								Hand 2:
---------							--------
-Qc Qd Qh 7c 4h 2c 						Qc Qd Qh 7c 4h 2c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 0 / value Q)	 - The most of a kind is 3 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh 7c 4h 		      |	 - 5 cards used for hand: Qc Qd Qh Qc 4h 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 1 wins!							Hand 1 wins!
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-Qc Qd Qh 7c 5h 2c 						Qc Qd Qh 7c 5h 2c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 0 / value Q)	 - The most of a kind is 3 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh 7c 5h 		      |	 - 5 cards used for hand: Qc Qd Qh Qc 5h 
-Hand 2:								Hand 2:
---------							--------
-Qc Qd Qh 7c 5h 3c 						Qc Qd Qh 7c 5h 3c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 0 / value Q)	 - The most of a kind is 3 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh 7c 5h 		      |	 - 5 cards used for hand: Qc Qd Qh Qc 5h 
-Comparison : 							Comparison : 
---------------							--------------
-Tie								Tie
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-As Kc Qc Qd Qh 7c 						As Kc Qc Qd Qh 7c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 2 / value Q)	 - The most of a kind is 3 of a kind (at index 2 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh As Kc 			 - 5 cards used for hand: Qc Qd Qh As Kc 
-Hand 2:								Hand 2:
---------							--------
-As Qc Jc Jd Jh 7c 						As Qc Jc Jd Jh 7c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 2 / value J)	 - The most of a kind is 3 of a kind (at index 2 / value J)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Jc Jd Jh As Qc 			 - 5 cards used for hand: Jc Jd Jh As Qc 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 1 wins!							Hand 1 wins!
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-As Kc Jc Jd Jh 7c 						As Kc Jc Jd Jh 7c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 2 / value J)	 - The most of a kind is 3 of a kind (at index 2 / value J)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Jc Jd Jh As Kc 			 - 5 cards used for hand: Jc Jd Jh As Kc 
-Hand 2:								Hand 2:
---------							--------
-As Qc Jc Jd Jh 7c 						As Qc Jc Jd Jh 7c 
- - No flush							 - No flush
- - The most of a kind is 3 of a kind (at index 2 / value J)	 - The most of a kind is 3 of a kind (at index 2 / value J)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: THREE_OF_A_KIND			 - evaluate_hand's ranking: THREE_OF_A_KIND
- - 5 cards used for hand: Jc Jd Jh As Qc 			 - 5 cards used for hand: Jc Jd Jh As Qc 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 1 wins!							Hand 1 wins!
-============================					============================
+Your file matched the expected output
+ - Testcase passed
 Testcase 5: Trying hands with straights
  Checking the output 
 Your file matched the expected output
@@ -226,284 +146,153 @@ Your file matched the expected output
  - Testcase passed
 Testcase 7: Trying hands with full houses
 Valgrind returned an error status
-==220== Memcheck, a memory error detector
-==220== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==220== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==220== Command: ./test-eval inp.7.txt
-==220== Parent PID: 219
-==220== 
-==220== Invalid read of size 8
-==220==    at 0x40148B: card_ptr_comp (eval.c:9)
-==220==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==220==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==220==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==220==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==220==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==220==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==220==    by 0x4E7369E: qsort_r (msort.c:297)
-==220==    by 0x401BA1: compare_hands (eval.c:247)
-==220==    by 0x402B26: main (test-eval.c:124)
-==220==  Address 0x520e940 is 0 bytes after a block of size 48 alloc'd
-==220==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==220==    by 0x40103A: add_card_to (deck-c4.c:29)
-==220==    by 0x40324B: hand_from_string (input.c:49)
-==220==    by 0x402B0F: main (test-eval.c:123)
-==220== 
-==220== Invalid read of size 4
-==220==    at 0x40148E: card_ptr_comp (eval.c:9)
-==220==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==220==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==220==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==220==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==220==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==220==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==220==    by 0x4E7369E: qsort_r (msort.c:297)
-==220==    by 0x401BA1: compare_hands (eval.c:247)
-==220==    by 0x402B26: main (test-eval.c:124)
-==220==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==220== 
-==220== 
-==220== Process terminating with default action of signal 11 (SIGSEGV): dumping core
-==220==  Access not within mapped region at address 0x0
-==220==    at 0x40148E: card_ptr_comp (eval.c:9)
-==220==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==220==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==220==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==220==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==220==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==220==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==220==    by 0x4E7369E: qsort_r (msort.c:297)
-==220==    by 0x401BA1: compare_hands (eval.c:247)
-==220==    by 0x402B26: main (test-eval.c:124)
-==220==  If you believe this happened as a result of a stack
-==220==  overflow in your program's main thread (unlikely but
-==220==  possible), you can try to increase the size of the
-==220==  main thread stack using the --main-stacksize= flag.
-==220==  The main thread stack size used in this run was 8388608.
-==220== 
-==220== HEAP SUMMARY:
-==220==     in use at exit: 912 bytes in 19 blocks
-==220==   total heap usage: 386 allocs, 367 frees, 16,504 bytes allocated
-==220== 
-==220== LEAK SUMMARY:
-==220==    definitely lost: 0 bytes in 0 blocks
-==220==    indirectly lost: 0 bytes in 0 blocks
-==220==      possibly lost: 0 bytes in 0 blocks
-==220==    still reachable: 912 bytes in 19 blocks
-==220==         suppressed: 0 bytes in 0 blocks
-==220== Rerun with --leak-check=full to see details of leaked memory
-==220== 
-==220== For counts of detected and suppressed errors, rerun with: -v
-==220== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==459== Memcheck, a memory error detector
+==459== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==459== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==459== Command: ./test-eval inp.7.txt
+==459== Parent PID: 458
+==459== 
+==459== Invalid read of size 8
+==459==    at 0x40148B: card_ptr_comp (eval.c:9)
+==459==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==459==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==459==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==459==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==459==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==459==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==459==    by 0x4E7369E: qsort_r (msort.c:297)
+==459==    by 0x401BFC: compare_hands (eval.c:265)
+==459==    by 0x402BD2: main (test-eval.c:124)
+==459==  Address 0x520e940 is 0 bytes after a block of size 48 alloc'd
+==459==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==459==    by 0x40103A: add_card_to (deck-c4.c:29)
+==459==    by 0x4032F7: hand_from_string (input.c:49)
+==459==    by 0x402BBB: main (test-eval.c:123)
+==459== 
+==459== Invalid read of size 4
+==459==    at 0x40148E: card_ptr_comp (eval.c:9)
+==459==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==459==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==459==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==459==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==459==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==459==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==459==    by 0x4E7369E: qsort_r (msort.c:297)
+==459==    by 0x401BFC: compare_hands (eval.c:265)
+==459==    by 0x402BD2: main (test-eval.c:124)
+==459==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==459== 
+==459== 
+==459== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==459==  Access not within mapped region at address 0x0
+==459==    at 0x40148E: card_ptr_comp (eval.c:9)
+==459==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==459==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==459==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==459==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==459==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==459==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==459==    by 0x4E7369E: qsort_r (msort.c:297)
+==459==    by 0x401BFC: compare_hands (eval.c:265)
+==459==    by 0x402BD2: main (test-eval.c:124)
+==459==  If you believe this happened as a result of a stack
+==459==  overflow in your program's main thread (unlikely but
+==459==  possible), you can try to increase the size of the
+==459==  main thread stack using the --main-stacksize= flag.
+==459==  The main thread stack size used in this run was 8388608.
+==459== 
+==459== HEAP SUMMARY:
+==459==     in use at exit: 912 bytes in 19 blocks
+==459==   total heap usage: 386 allocs, 367 frees, 16,504 bytes allocated
+==459== 
+==459== LEAK SUMMARY:
+==459==    definitely lost: 0 bytes in 0 blocks
+==459==    indirectly lost: 0 bytes in 0 blocks
+==459==      possibly lost: 0 bytes in 0 blocks
+==459==    still reachable: 912 bytes in 19 blocks
+==459==         suppressed: 0 bytes in 0 blocks
+==459== Rerun with --leak-check=full to see details of leaked memory
+==459== 
+==459== For counts of detected and suppressed errors, rerun with: -v
+==459== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 Testcase 8: Trying hands with 4 of a kind
  Checking the output 
-Line_8_did_not_match
-Line_16_did_not_match
-Line_28_did_not_match
-Line_36_did_not_match
-Line_39_did_not_match
-Line_48_did_not_match
-Line_68_did_not_match
-Line_88_did_not_match
-Line_96_did_not_match
-Line_108_did_not_match
-Line_116_did_not_match
-Your file did not match the expected ouput
- - Output did not match, testcase failed
-Hand 1:								Hand 1:
---------							--------
-Kc Kd Kh Ks 8c 7d 						Kc Kd Kh Ks 8c 7d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value K)	 - The most of a kind is 4 of a kind (at index 0 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks 8c 		      |	 - 5 cards used for hand: Kc Kd Kh Ks Kc 
-Hand 2:								Hand 2:
---------							--------
-Kc Kd Kh Ks 8c 6d 						Kc Kd Kh Ks 8c 6d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value K)	 - The most of a kind is 4 of a kind (at index 0 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks 8c 		      |	 - 5 cards used for hand: Kc Kd Kh Ks Kc 
-Comparison : 							Comparison : 
---------------							--------------
-Tie								Tie
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-Kc Kd Kh Ks 8c 7d 						Kc Kd Kh Ks 8c 7d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value K)	 - The most of a kind is 4 of a kind (at index 0 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks 8c 		      |	 - 5 cards used for hand: Kc Kd Kh Ks Kc 
-Hand 2:								Hand 2:
---------							--------
-Kc Kd Kh Ks 9d 8c 						Kc Kd Kh Ks 9d 8c 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value K)	 - The most of a kind is 4 of a kind (at index 0 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks 9d 		      |	 - 5 cards used for hand: Kc Kd Kh Ks Kc 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 2 wins!						      |	Tie
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-Kc Kd Kh Ks 8c 7d 						Kc Kd Kh Ks 8c 7d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value K)	 - The most of a kind is 4 of a kind (at index 0 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks 8c 		      |	 - 5 cards used for hand: Kc Kd Kh Ks Kc 
-Hand 2:								Hand 2:
---------							--------
-As Kc Kd Kh Ks 4d 						As Kc Kd Kh Ks 4d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 1 / value K)	 - The most of a kind is 4 of a kind (at index 1 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks As 			 - 5 cards used for hand: Kc Kd Kh Ks As 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 2 wins!							Hand 2 wins!
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-Kc Kd Kh Ks 8c 7d 						Kc Kd Kh Ks 8c 7d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value K)	 - The most of a kind is 4 of a kind (at index 0 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks 8c 		      |	 - 5 cards used for hand: Kc Kd Kh Ks Kc 
-Hand 2:								Hand 2:
---------							--------
-Ac As Kc Kd Kh Ks 						Ac As Kc Kd Kh Ks 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 2 / value K)	 - The most of a kind is 4 of a kind (at index 2 / value K)
- - Secondary pair at index 0 (value A)				 - Secondary pair at index 0 (value A)
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks Ac 			 - 5 cards used for hand: Kc Kd Kh Ks Ac 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 2 wins!							Hand 2 wins!
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-Kc Kd Kh Ks 8c 7d 						Kc Kd Kh Ks 8c 7d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value K)	 - The most of a kind is 4 of a kind (at index 0 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks 8c 		      |	 - 5 cards used for hand: Kc Kd Kh Ks Kc 
-Hand 2:								Hand 2:
---------							--------
-Qc Qd Qh Qs 8c 6d 						Qc Qd Qh Qs 8c 6d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value Q)	 - The most of a kind is 4 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh Qs 8c 		      |	 - 5 cards used for hand: Qc Qd Qh Qs Qc 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 1 wins!							Hand 1 wins!
-============================					============================
-Hand 1:								Hand 1:
---------							--------
-Kc Kd Kh Ks 8c 7d 						Kc Kd Kh Ks 8c 7d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value K)	 - The most of a kind is 4 of a kind (at index 0 / value K)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Kc Kd Kh Ks 8c 		      |	 - 5 cards used for hand: Kc Kd Kh Ks Kc 
-Hand 2:								Hand 2:
---------							--------
-Qc Qd Qh Qs 9c 6d 						Qc Qd Qh Qs 9c 6d 
- - No flush							 - No flush
- - The most of a kind is 4 of a kind (at index 0 / value Q)	 - The most of a kind is 4 of a kind (at index 0 / value Q)
- - No secondary pair						 - No secondary pair
- - evaluate_hand's ranking: FOUR_OF_A_KIND			 - evaluate_hand's ranking: FOUR_OF_A_KIND
- - 5 cards used for hand: Qc Qd Qh Qs 9c 		      |	 - 5 cards used for hand: Qc Qd Qh Qs Qc 
-Comparison : 							Comparison : 
---------------							--------------
-Hand 1 wins!							Hand 1 wins!
-============================					============================
+Your file matched the expected output
+ - Testcase passed
 Testcase 9: Trying hands with straight flushes
  Checking the output 
 Your file matched the expected output
  - Testcase passed
 Testcase 10: Trying each type of hand ranking
 Valgrind returned an error status
-==250== Memcheck, a memory error detector
-==250== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==250== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==250== Command: ./test-eval inp.10.txt
-==250== Parent PID: 249
-==250== 
-==250== Invalid read of size 8
-==250==    at 0x40148B: card_ptr_comp (eval.c:9)
-==250==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==250==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==250==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==250==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==250==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==250==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==250==    by 0x4E7369E: qsort_r (msort.c:297)
-==250==    by 0x401BA1: compare_hands (eval.c:247)
-==250==    by 0x402B26: main (test-eval.c:124)
-==250==  Address 0x520b2b8 is 0 bytes after a block of size 40 alloc'd
-==250==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==250==    by 0x40103A: add_card_to (deck-c4.c:29)
-==250==    by 0x40324B: hand_from_string (input.c:49)
-==250==    by 0x402B0F: main (test-eval.c:123)
-==250== 
-==250== Invalid read of size 4
-==250==    at 0x40148E: card_ptr_comp (eval.c:9)
-==250==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==250==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==250==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==250==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==250==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==250==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==250==    by 0x4E7369E: qsort_r (msort.c:297)
-==250==    by 0x401BA1: compare_hands (eval.c:247)
-==250==    by 0x402B26: main (test-eval.c:124)
-==250==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
-==250== 
-==250== 
-==250== Process terminating with default action of signal 11 (SIGSEGV): dumping core
-==250==  Access not within mapped region at address 0x0
-==250==    at 0x40148E: card_ptr_comp (eval.c:9)
-==250==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
-==250==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==250==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==250==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
-==250==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
-==250==    by 0x4E7369E: msort_with_tmp (msort.c:45)
-==250==    by 0x4E7369E: qsort_r (msort.c:297)
-==250==    by 0x401BA1: compare_hands (eval.c:247)
-==250==    by 0x402B26: main (test-eval.c:124)
-==250==  If you believe this happened as a result of a stack
-==250==  overflow in your program's main thread (unlikely but
-==250==  possible), you can try to increase the size of the
-==250==  main thread stack using the --main-stacksize= flag.
-==250==  The main thread stack size used in this run was 8388608.
-==250== 
-==250== HEAP SUMMARY:
-==250==     in use at exit: 880 bytes in 17 blocks
-==250==   total heap usage: 234 allocs, 217 frees, 13,124 bytes allocated
-==250== 
-==250== LEAK SUMMARY:
-==250==    definitely lost: 0 bytes in 0 blocks
-==250==    indirectly lost: 0 bytes in 0 blocks
-==250==      possibly lost: 0 bytes in 0 blocks
-==250==    still reachable: 880 bytes in 17 blocks
-==250==         suppressed: 0 bytes in 0 blocks
-==250== Rerun with --leak-check=full to see details of leaked memory
-==250== 
-==250== For counts of detected and suppressed errors, rerun with: -v
-==250== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==488== Memcheck, a memory error detector
+==488== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==488== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==488== Command: ./test-eval inp.10.txt
+==488== Parent PID: 487
+==488== 
+==488== Invalid read of size 8
+==488==    at 0x40148B: card_ptr_comp (eval.c:9)
+==488==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==488==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==488==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==488==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==488==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==488==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==488==    by 0x4E7369E: qsort_r (msort.c:297)
+==488==    by 0x401BFC: compare_hands (eval.c:265)
+==488==    by 0x402BD2: main (test-eval.c:124)
+==488==  Address 0x520b2b8 is 0 bytes after a block of size 40 alloc'd
+==488==    at 0x4C2FD5F: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==488==    by 0x40103A: add_card_to (deck-c4.c:29)
+==488==    by 0x4032F7: hand_from_string (input.c:49)
+==488==    by 0x402BBB: main (test-eval.c:123)
+==488== 
+==488== Invalid read of size 4
+==488==    at 0x40148E: card_ptr_comp (eval.c:9)
+==488==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==488==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==488==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==488==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==488==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==488==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==488==    by 0x4E7369E: qsort_r (msort.c:297)
+==488==    by 0x401BFC: compare_hands (eval.c:265)
+==488==    by 0x402BD2: main (test-eval.c:124)
+==488==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==488== 
+==488== 
+==488== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==488==  Access not within mapped region at address 0x0
+==488==    at 0x40148E: card_ptr_comp (eval.c:9)
+==488==    by 0x4E73231: msort_with_tmp.part.0 (msort.c:83)
+==488==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==488==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==488==    by 0x4E72EDC: msort_with_tmp (msort.c:45)
+==488==    by 0x4E72EDC: msort_with_tmp.part.0 (msort.c:54)
+==488==    by 0x4E7369E: msort_with_tmp (msort.c:45)
+==488==    by 0x4E7369E: qsort_r (msort.c:297)
+==488==    by 0x401BFC: compare_hands (eval.c:265)
+==488==    by 0x402BD2: main (test-eval.c:124)
+==488==  If you believe this happened as a result of a stack
+==488==  overflow in your program's main thread (unlikely but
+==488==  possible), you can try to increase the size of the
+==488==  main thread stack using the --main-stacksize= flag.
+==488==  The main thread stack size used in this run was 8388608.
+==488== 
+==488== HEAP SUMMARY:
+==488==     in use at exit: 880 bytes in 17 blocks
+==488==   total heap usage: 234 allocs, 217 frees, 13,124 bytes allocated
+==488== 
+==488== LEAK SUMMARY:
+==488==    definitely lost: 0 bytes in 0 blocks
+==488==    indirectly lost: 0 bytes in 0 blocks
+==488==      possibly lost: 0 bytes in 0 blocks
+==488==    still reachable: 880 bytes in 17 blocks
+==488==         suppressed: 0 bytes in 0 blocks
+==488== Rerun with --leak-check=full to see details of leaked memory
+==488== 
+==488== For counts of detected and suppressed errors, rerun with: -v
+==488== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
 
-Overall Grade: F
+Overall Grade: D
