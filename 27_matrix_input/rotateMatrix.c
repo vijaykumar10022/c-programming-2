@@ -23,14 +23,22 @@ int main(int argc, char ** argv){
     }
     FILE * f = fopen(argv[1], "r");
     if (f == NULL) {
-        perror("Could not open file");
+        fprintf(stderr,"Usage: Couldn't open file\n");
         return EXIT_FAILURE;
     }
-    int chr;
+    int chr = fgetc(f);
+    if (chr == EOF) {
+        fprintf(stderr,"Usage: Empty File\n");
+        return EXIT_FAILURE;
+    }
     char to_rot_mat[10][10];
     int row_count = 0;
     int col_count = 0;
-    while ((chr = fgetc(f)) != EOF) {
+    while (chr != EOF) {
+        if (row_count > 10) {
+            fprintf(stderr,"Usage: Wrong number of rows\n");
+            return EXIT_FAILURE;
+        }
         if (col_count == 10) {
             col_count = 0;
             row_count++;
@@ -47,10 +55,7 @@ int main(int argc, char ** argv){
             to_rot_mat[row_count][col_count] = chr;
             col_count++;
         }
-    }
-    if (row_count != 10) {
-        fprintf(stderr,"Usage: Wrong number of rows\n");
-        return EXIT_FAILURE;
+        chr = fgetc(f);
     }
     fclose(f);
     rotate(to_rot_mat);
