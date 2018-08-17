@@ -18,10 +18,12 @@ void rotate(char matrix[10][10]){
 
 int main(int argc, char ** argv){
     if (argc != 2) {
+        fprintf(stderr,"Usage: Wrong amount of Arguments\n");
         return EXIT_FAILURE;
     }
     FILE * f = fopen(argv[1], "r");
     if (f == NULL) {
+        perror("Could not open file");
         return EXIT_FAILURE;
     }
     int chr;
@@ -33,11 +35,13 @@ int main(int argc, char ** argv){
             col_count = 0;
             row_count++;
             if (chr != '\n') {
+                fprintf(stderr,"Usage: Missing newline at the end of the row\n");
                 return EXIT_FAILURE;
             }
         }
         else {
             if (chr == '\n') {
+                fprintf(stderr,"Usage: Less columns than expected\n");
                 return EXIT_FAILURE;
             }
             to_rot_mat[row_count][col_count] = chr;
@@ -45,6 +49,7 @@ int main(int argc, char ** argv){
         }
     }
     if (row_count != 10) {
+        fprintf(stderr,"Usage: Wrong number of rows\n");
         return EXIT_FAILURE;
     }
     fclose(f);
