@@ -35,8 +35,8 @@ int main(int argc, char ** argv){
     int row_count = 0;
     int col_count = 0;
     while (chr != EOF) {
-        if (row_count > 10) {
-            fprintf(stderr,"Usage: Wrong number of rows\n");
+        if (row_count > 9) {
+            fprintf(stderr,"Usage: Higher number of rows\n");
             return EXIT_FAILURE;
         }
         if (col_count == 10) {
@@ -58,6 +58,10 @@ int main(int argc, char ** argv){
         chr = fgetc(f);
     }
     fclose(f);
+    if (row_count < 10) {
+        fprintf(stderr,"Usage: Lower number of rows\n");
+        return EXIT_FAILURE;
+    }
     rotate(to_rot_mat);
     
     for (int row = 0; row < 10; row++) {
