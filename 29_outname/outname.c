@@ -5,8 +5,7 @@
 
 char * computeOutputFileName(const char * inputName) {
     char *outputName = malloc((strlen(inputName) + 8)*sizeof(*outputName));
-    outputName = "";
-    outputName = strcat(outputName, inputName);
-    outputName = strcat(outputName, ".counts");
+    outputName = strcpy(outputName, inputName);
+    outputName = strcat(outputName, ".counts\0");
     return outputName;
 }
