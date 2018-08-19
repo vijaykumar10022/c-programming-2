@@ -105,7 +105,7 @@ int main(int argc, char ** argv) {
         }
         return EXIT_SUCCESS;
     }
-    char * file_in;
+    char * file_in = NULL;
     for (int i = 1; i < argc; i++) {
         file_in = argv[i];
         char ** arr = getCharArrFile(file_in, &count);
