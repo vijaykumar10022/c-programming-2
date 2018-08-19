@@ -58,7 +58,7 @@ int printArrayFree(char ** line_array, size_t count) {
     if (count > 1) {
         sortData(line_array, count);
     }
-    if (count == 0) {
+    if (count < 2) {
         return EXIT_FAILURE;
     }
     for (size_t i = 0; i < count; i++) {
