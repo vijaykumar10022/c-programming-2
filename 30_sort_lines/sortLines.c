@@ -30,6 +30,9 @@ char ** getCharArrFile(char * filename, size_t * count) {
             return NULL;
         }
         line_array = realloc(line_array, (*count + 1)*sizeof(*line_array));
+        if (line_array == NULL) {
+            return NULL;
+        }
         line_array[*count] = line;
         line = NULL;
         (*count)++;
