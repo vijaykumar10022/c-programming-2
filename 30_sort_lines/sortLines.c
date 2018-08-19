@@ -50,6 +50,9 @@ char ** getCharArrInp(size_t * count) {
         line = NULL;
         (*count)++;
     }
+    if (*count == 0) {
+	return NULL;
+    }
     free(line);
     return line_array;
 }
