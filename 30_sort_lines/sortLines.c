@@ -26,6 +26,9 @@ char ** getCharArrFile(char * filename, size_t * count) {
 
     char ** line_array = NULL;
     while (getline(&line, &sz, work_file) >= 0) {
+        if (line[strlen(line) - 1] != '\n'){
+            return NULL;
+        }
         line_array = realloc(line_array, (*count + 1)*sizeof(*line_array));
         line_array[*count] = line;
         line = NULL;
@@ -54,6 +57,9 @@ char ** getCharArrInp(size_t * count) {
 int printArrayFree(char ** line_array, size_t count) {
     if (count > 1) {
         sortData(line_array, count);
+    }
+    if (count == 0) {
+        return EXIT_FAILURE;
     }
     for (size_t i = 0; i < count; i++) {
         printf("%s", line_array[i]);
