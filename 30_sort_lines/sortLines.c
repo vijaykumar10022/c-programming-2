@@ -35,7 +35,10 @@ char ** getCharArrFile(char * filename, size_t * count) {
         (*count)++;
     }
     free(line);
-    fclose(work_file);
+    int close_res = fclose(work_file);
+    if (close_res != 0) {
+        return NULL;
+    }
     return line_array;
 }
 
