@@ -19,7 +19,6 @@ void sortData(char ** data, size_t count) {
 char ** getCharArrFile(char * filename, size_t * count) {
     FILE * work_file = fopen(filename, "r");
     if (work_file == NULL) {
-        printf("Error in file reading");
         return NULL;
     }
     char * line = NULL;
@@ -75,7 +74,11 @@ int main(int argc, char ** argv) {
             printf("Input error");
             return EXIT_FAILURE;
         }
-        printArrayFree(arr, count);
+        int suc = printArrayFree(arr, count);
+        if (suc == EXIT_FAILURE) {
+            printf("Print fail");
+            return EXIT_FAILURE;
+        }
         return EXIT_SUCCESS;
     }
     char * file_in;
@@ -83,9 +86,14 @@ int main(int argc, char ** argv) {
         file_in = argv[i];
         char ** arr = getCharArrFile(file_in, &count);
         if (arr == NULL) {
+            printf("Error in file");
             return EXIT_FAILURE;
         }
-        printArrayFree(arr, count);
+        int suc = printArrayFree(arr, count);
+        if (suc == EXIT_FAILURE) {
+            printf("Print fail");
+            return EXIT_FAILURE;
+        }
         count = 0;
     }
 
