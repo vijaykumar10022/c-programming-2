@@ -52,6 +52,9 @@ char ** getCharArrInp(size_t * count) {
     char ** line_array = NULL;
     while ((size = getline(&line, &sz, stdin)) > 1) {
         line_array = realloc(line_array, (*count + 1)*sizeof(*line_array));
+        if (line_array == NULL) {
+            return NULL;
+        }
         line_array[*count] = line;
         line = NULL;
         (*count)++;
