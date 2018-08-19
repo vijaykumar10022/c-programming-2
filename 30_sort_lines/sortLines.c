@@ -71,6 +71,10 @@ int main(int argc, char ** argv) {
     size_t count = 0;
     if (argc == 1) {
         char ** arr = getCharArrInp(&count);
+        if (arr == NULL) {
+            printf("Input error");
+            return EXIT_FAILURE;
+        }
         printArrayFree(arr, count);
         return EXIT_SUCCESS;
     }
