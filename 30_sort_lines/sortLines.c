@@ -27,6 +27,10 @@ char ** getCharArrFile(char * filename, size_t * count) {
 
     char ** line_array = NULL;
     while (getline(&line, &sz, work_file) >= 0) {
+        if (strlen(line) == 1) {
+            printf("Wrong file content");
+            return NULL;
+        }
         line_array = realloc(line_array, (*count + 1)*sizeof(*line_array));
         line_array[*count] = line;
         line = NULL;
