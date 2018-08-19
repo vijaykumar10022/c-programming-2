@@ -26,6 +26,9 @@ char ** getCharArrFile(char * filename, size_t * count) {
 
     char ** line_array = NULL;
     while (getline(&line, &sz, work_file) >= 0) {
+        if (line == NULL) {
+            return NULL;
+        }
         if (line[strlen(line) - 1] != '\n'){
             return NULL;
         }
@@ -51,6 +54,9 @@ char ** getCharArrInp(size_t * count) {
     ssize_t size = 0; 
     char ** line_array = NULL;
     while ((size = getline(&line, &sz, stdin)) > 1) {
+        if (line == NULL) {
+            return NULL;
+        }
         line_array = realloc(line_array, (*count + 1)*sizeof(*line_array));
         if (line_array == NULL) {
             return NULL;
