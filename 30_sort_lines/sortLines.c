@@ -53,7 +53,9 @@ char ** getCharArrInp(size_t * count) {
 }
 
 int printArrayFree(char ** line_array, size_t count) {
-    sortData(line_array, count);
+    if (count > 1) {
+        sortData(line_array, count);
+    }
     for (size_t i = 0; i < count; i++) {
         printf("%s", line_array[i]);
     }
