@@ -92,13 +92,15 @@ int printArrayFree(char ** line_array, size_t count) {
 
 int main(int argc, char ** argv) {
     size_t count = 0;
+    int suc = 0;
+    char ** arr = NULL;
     if (argc == 1) {
-        char ** arr = getCharArrInp(&count);
+        arr = getCharArrInp(&count);
         if (arr == NULL) {
             printf("Input error\n");
             return EXIT_FAILURE;
         }
-        int suc = printArrayFree(arr, count);
+        suc = printArrayFree(arr, count);
         if (suc == EXIT_FAILURE) {
             printf("Print fail\n");
             return EXIT_FAILURE;
@@ -108,12 +110,12 @@ int main(int argc, char ** argv) {
     char * file_in = NULL;
     for (int i = 1; i < argc; i++) {
         file_in = argv[i];
-        char ** arr = getCharArrFile(file_in, &count);
+        arr = getCharArrFile(file_in, &count);
         if (arr == NULL) {
             printf("Error in file\n");
             return EXIT_FAILURE;
         }
-        int suc = printArrayFree(arr, count);
+        suc = printArrayFree(arr, count);
         if (suc == EXIT_FAILURE) {
             printf("Print fail\n");
             return EXIT_FAILURE;
