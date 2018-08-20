@@ -95,12 +95,12 @@ int main(int argc, char ** argv) {
     if (argc == 1) {
         char ** arr = getCharArrInp(&count);
         if (arr == NULL) {
-            printf("Input error");
+            printf("Input error\n");
             return EXIT_FAILURE;
         }
         int suc = printArrayFree(arr, count);
         if (suc == EXIT_FAILURE) {
-            printf("Print fail");
+            printf("Print fail\n");
             return EXIT_FAILURE;
         }
         return EXIT_SUCCESS;
@@ -110,12 +110,12 @@ int main(int argc, char ** argv) {
         file_in = argv[i];
         char ** arr = getCharArrFile(file_in, &count);
         if (arr == NULL) {
-            printf("Error in file");
+            printf("Error in file\n");
             return EXIT_FAILURE;
         }
         int suc = printArrayFree(arr, count);
         if (suc == EXIT_FAILURE) {
-            printf("Print fail");
+            printf("Print fail\n");
             return EXIT_FAILURE;
         }
         count = 0;
