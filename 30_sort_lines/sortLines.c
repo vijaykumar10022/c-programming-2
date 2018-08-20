@@ -121,6 +121,8 @@ int main(int argc, char ** argv) {
             return EXIT_FAILURE;
         }
         count = 0;
+        file_in = NULL;
+        arr = NULL;
     }
 
   
