@@ -41,6 +41,7 @@ char ** getCharArrFile(char * filename, size_t * count) {
         }
         line_array[*count] = line;
         line = NULL;
+        sz = 0;
         (*count)++;
     }
     free(line);
