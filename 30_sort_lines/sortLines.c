@@ -23,9 +23,9 @@ char ** getCharArrFile(char * filename, size_t * count) {
     }
     char * line = NULL;
     size_t sz = 0;
-
+    ssize_t size = 0;
     char ** line_array = NULL;
-    while (getline(&line, &sz, work_file) >= 0) {
+    while ((size = getline(&line, &sz, work_file)) >= 0) {
         if (line == NULL) {
             return NULL;
         }
@@ -53,7 +53,7 @@ char ** getCharArrInp(size_t * count) {
     size_t sz = 0;
     ssize_t size = 0; 
     char ** line_array = NULL;
-    while ((size = getline(&line, &sz, stdin)) > 1) {
+    while ((size = getline(&line, &sz, stdin)) >= 0) {
         if (line == NULL) {
             return NULL;
         }
@@ -63,6 +63,7 @@ char ** getCharArrInp(size_t * count) {
         }
         line_array[*count] = line;
         line = NULL;
+        sz = 0;
         (*count)++;
     }
     if (*count == 0) {
