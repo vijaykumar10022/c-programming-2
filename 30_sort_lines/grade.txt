@@ -1,4 +1,4 @@
-Grading at Mon Aug 20 01:01:28 UTC 2018
+Grading at Mon Aug 20 01:07:06 UTC 2018
 Attempting to compile sortLines.c
 #################################################
 testcase1:
