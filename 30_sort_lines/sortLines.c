@@ -25,7 +25,7 @@ char ** getCharArrFile(char * filename, size_t * count) {
     size_t sz = 0;
     ssize_t size = 0;
     char ** line_array = NULL;
-    while ((size = getline(&line, &sz, work_file)) > 1) {
+    while ((size = getline(&line, &sz, work_file)) >= 0) {
         if (line == NULL) {
             return NULL;
         }
