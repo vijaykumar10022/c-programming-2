@@ -29,9 +29,6 @@ char ** getCharArrFile(char * filename, size_t * count) {
         if (line == NULL) {
             return NULL;
         }
-        if (strcmp(line, "\n")) {
-            return NULL;
-        }
         if (line[strlen(line) - 1] != '\n'){
             return NULL;
         }
