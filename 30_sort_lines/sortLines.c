@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 
 //This function is used to figure out the ordering
@@ -114,6 +115,10 @@ int main(int argc, char ** argv) {
             printf("Print fail\n");
             return EXIT_FAILURE;
         }
+        if (errno != 0) {
+            printf("Error");
+            return EXIT_FAILURE;
+        }
         return EXIT_SUCCESS;
     }
     char * file_in = NULL;
@@ -133,7 +138,9 @@ int main(int argc, char ** argv) {
         file_in = NULL;
         arr = NULL;
     }
-
-  
+    if (errno != 0) {
+        printf("Error");
+        return EXIT_FAILURE;
+    } 
     return EXIT_SUCCESS;
 }
