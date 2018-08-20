@@ -57,7 +57,7 @@ char ** getCharArrInp(size_t * count) {
     size_t sz = 0;
     ssize_t size = 0; 
     char ** line_array = NULL;
-    while ((size = getline(&line, &sz, stdin)) >= 0) {
+    while ((size = getline(&line, &sz, stdin)) > 1) {
         if (size == 0) {
             return NULL;
         }
