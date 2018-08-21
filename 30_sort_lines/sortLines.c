@@ -115,6 +115,10 @@ int main(int argc, char ** argv) {
             printf("Error");
             return EXIT_FAILURE;
         }
+        if (errno != 0) {
+            printf("Error");
+            return EXIT_FAILURE;
+        }
         return EXIT_SUCCESS;
     }
     char * file_in = NULL;
