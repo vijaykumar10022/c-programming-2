@@ -59,10 +59,6 @@ char ** getCharArrInp(size_t * count) {
     ssize_t size = 0; 
     char ** line_array = NULL;
     while ((size = getline(&line, &sz, stdin)) > 1) {
-        if (size == 0) {
-            return NULL;
-        }
-
         if (line == NULL) {
             return NULL;
         }
@@ -137,10 +133,10 @@ int main(int argc, char ** argv) {
         count = 0;
         file_in = NULL;
         arr = NULL;
+        if (errno != 0) {
+            printf("Error");
+            return EXIT_FAILURE;
+        }
     }
-    if (errno != 0) {
-        printf("Error");
-        return EXIT_FAILURE;
-    } 
     return EXIT_SUCCESS;
 }
