@@ -17,23 +17,19 @@ void sortData(char ** data, size_t count) {
   qsort(data, count, sizeof(char *), stringOrder);
 }
 
-char ** getCharArrFile(char * filename, size_t * count) {
+char ** getCharArrFile(char ** line_array, char * filename, size_t * count) {
+    errno = 0;
+    
+    char *line = NULL;
+    size_t sz = 0;
+    ssize_t size = 0;
+   
     FILE * work_file = fopen(filename, "r");
     if (work_file == NULL) {
         return NULL;
     }
-    char * line = NULL;
-    size_t sz = 0;
-    ssize_t size = 0;
-    char ** line_array = NULL;
     while ((size = getline(&line, &sz, work_file)) >= 0) {
         if (line == NULL) {
-            return NULL;
-        }
-        if (size == 0) {
-            return NULL;
-        }
-        if (line[strlen(line) - 1] != '\n'){
             return NULL;
         }
         line_array = realloc(line_array, (*count + 1)*sizeof(*line_array));
@@ -46,18 +42,23 @@ char ** getCharArrFile(char * filename, size_t * count) {
         (*count)++;
     }
     free(line);
-    int close_res = fclose(work_file);
-    if (close_res != 0) {
+    int cls = fclose(work_file);
+    if (cls != 0) {
+        return NULL;
+    }
+    if (errno != 0) {
         return NULL;
     }
     return line_array;
+
 }
 
-char ** getCharArrInp(size_t * count) {
+char ** getCharArrInp(char **line_array, size_t * count) {
+    errno = 0;
     char * line = NULL;
     size_t sz = 0;
     ssize_t size = 0; 
-    char ** line_array = NULL;
+    
     while ((size = getline(&line, &sz, stdin)) > 1) {
         if (line == NULL) {
             return NULL;
@@ -75,14 +76,18 @@ char ** getCharArrInp(size_t * count) {
 	return NULL;
     }
     free(line);
+    if (errno != 0) {
+        return NULL;
+    }
     return line_array;
 }
 
 int printArrayFree(char ** line_array, size_t count) {
+    errno = 0;
     if (count > 1) {
         sortData(line_array, count);
     }
-    if (count < 2) {
+    if (count < 1) {
         return EXIT_FAILURE;
     }
     for (size_t i = 0; i < count; i++) {
@@ -93,6 +98,9 @@ int printArrayFree(char ** line_array, size_t count) {
         free(line_array[i]);
     }
     free(line_array);
+    if (errno != 0) {
+        return EXIT_FAILURE;
+    }
     return EXIT_SUCCESS;
 }
 
@@ -101,7 +109,7 @@ int main(int argc, char ** argv) {
     int suc = 0;
     char ** arr = NULL;
     if (argc == 1) {
-        arr = getCharArrInp(&count);
+        arr = getCharArrInp(arr, &count);
         if (arr == NULL) {
             printf("Input error\n");
             return EXIT_FAILURE;
@@ -111,20 +119,12 @@ int main(int argc, char ** argv) {
             printf("Print fail\n");
             return EXIT_FAILURE;
         }
-        if (errno != 0) {
-            printf("Error");
-            return EXIT_FAILURE;
-        }
-        if (errno != 0) {
-            printf("Error");
-            return EXIT_FAILURE;
-        }
         return EXIT_SUCCESS;
     }
     char * file_in = NULL;
     for (int i = 1; i < argc; i++) {
         file_in = argv[i];
-        arr = getCharArrFile(file_in, &count);
+        arr = getCharArrFile(arr, file_in, &count);
         if (arr == NULL) {
             printf("Error in file\n");
             return EXIT_FAILURE;
@@ -137,10 +137,6 @@ int main(int argc, char ** argv) {
         count = 0;
         file_in = NULL;
         arr = NULL;
-        if (errno != 0) {
-            printf("Error");
-            return EXIT_FAILURE;
-        }
     }
     return EXIT_SUCCESS;
 }
