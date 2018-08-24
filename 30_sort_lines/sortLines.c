@@ -129,6 +129,9 @@ int main(int argc, char ** argv) {
             printf("Error in file\n");
             return EXIT_FAILURE;
         }
+        else {
+            fclose(f);
+        }
     }
     file_in = NULL;
     for (int i = 1; i < argc; i++) {
