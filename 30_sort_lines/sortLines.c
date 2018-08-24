@@ -129,6 +129,15 @@ int main(int argc, char ** argv) {
             printf("Error in file\n");
             return EXIT_FAILURE;
         }
+    }
+    file_in = NULL;
+    for (int i = 1; i < argc; i++) {
+        file_in = argv[i];
+        arr = getCharArrFile(arr, file_in, &count);
+        if (arr == NULL) {
+            printf("Error in file\n");
+            return EXIT_FAILURE;
+        }
         suc = printArrayFree(arr, count);
         if (suc == EXIT_FAILURE) {
             printf("Print fail\n");
