@@ -124,8 +124,8 @@ int main(int argc, char ** argv) {
     char * file_in = NULL;
     for (int i = 1; i < argc; i++) {
         file_in = argv[i];
-        arr = getCharArrFile(arr, file_in, &count);
-        if (arr == NULL) {
+        FILE * f = fopen(file_in, "r");
+        if (f == NULL) {
             printf("Error in file\n");
             return EXIT_FAILURE;
         }
