@@ -41,8 +41,21 @@ void addRandomMine(board_t * b) {
 }
 
 board_t * makeBoard(int w, int h, int numMines) {
-  //WRITE ME!
-  return NULL;
+    board_t * ret_board = malloc(sizeof(*ret_board));
+    ret_board -> width = w;
+    ret_board -> height = h;
+    ret_board -> board = malloc(h*sizeof(*(ret_board -> board)));
+    for (int i = 0; i < h; i++) {
+        *(ret_board -> board + i) = malloc(w*sizeof(int));
+        for (int j = 0; j < w; j++) {
+            *(*(ret_board -> board + i) + j) = UNKNOWN;
+        }
+    }
+    for (int k = 0; k < numMines; k++) {
+        addRandomMine(ret_board);
+    }
+
+    return ret_board;
 }
 void printBoard(board_t * b) {    
   int found = 0;
@@ -95,8 +108,19 @@ void printBoard(board_t * b) {
   printf("\nFound %d of %d mines\n", found, b->totalMines);
 }
 int countMines(board_t * b, int x, int y) {
-  //WRITE ME!
-  return 0;
+    int mine_num = 0;
+    for (int drow = -1; drow < 2; drow++) {
+        for (int dcol = -1; dcol < 2; dcol++) {
+            int row = y + drow;
+            int col = x + dcol;
+            if ((0 <= row && row < (b -> height)) && (0 <= col && row < (b -> width))) {
+                if (!((drow == 0) && (dcol == 0))) {
+                    mine_num = mine_num + IS_MINE(b -> board[row][col]);
+                }
+            }
+        }
+    }
+    return mine_num;
 }
 int click (board_t * b, int x, int y) {
   if (x < 0 || x >= b->width ||
@@ -118,12 +142,27 @@ int click (board_t * b, int x, int y) {
 }
 
 int checkWin(board_t * b) {
-  //WRITE ME!
-  return 0;
+    int win_flag = 1;
+    for (int row = 0; row < b -> height; row++) {
+        for (int col = 0; col < b -> width; col++) {
+            if (b -> board[row][col] == UNKNOWN) {
+                win_flag = 0;
+                break;
+            }
+        }
+        if (win_flag == 0) {
+            break;
+        }
+    }
+    return win_flag;
 }
 
 void freeBoard(board_t * b) {
-  //WRITE ME!
+    for (int i = 0; i < b -> height; i++) {
+        free(b -> board[i]);
+    }
+    free(b -> board);
+    free(b);
 }
 
 int readInt(char ** linep, size_t * lineszp) {
