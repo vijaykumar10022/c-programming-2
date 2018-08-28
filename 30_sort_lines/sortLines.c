@@ -116,7 +116,7 @@ int main(int argc, char ** argv) {
         }
         suc = printArrayFree(arr, count);
         if (suc == EXIT_FAILURE) {
-            printf("Print fail\n");
+            fprintf(stderr, "Print fail\n");
             return EXIT_FAILURE;
         }
         return EXIT_SUCCESS;
@@ -126,7 +126,7 @@ int main(int argc, char ** argv) {
         file_in = argv[i];
         FILE * f = fopen(file_in, "r");
         if (f == NULL) {
-            printf("Error in file\n");
+            fprintf(stderr, "Error in file\n");
             return EXIT_FAILURE;
         }
         else {
@@ -138,12 +138,12 @@ int main(int argc, char ** argv) {
         file_in = argv[i];
         arr = getCharArrFile(arr, file_in, &count);
         if (arr == NULL) {
-            printf("Error in file\n");
+            fprintf(stderr, "Error in file\n");
             return EXIT_FAILURE;
         }
         suc = printArrayFree(arr, count);
         if (suc == EXIT_FAILURE) {
-            printf("Print fail\n");
+            fprintf(stderr, "Print fail\n");
             return EXIT_FAILURE;
         }
         count = 0;
