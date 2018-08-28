@@ -114,7 +114,7 @@ int countMines(board_t * b, int x, int y) {
         for (int dcol = -1; dcol < 2; dcol++) {
             int row = y + drow;
             int col = x + dcol;
-            if ((0 <= row && row < (b -> height)) && (0 <= col && row < (b -> width))) {
+            if ((0 <= row && row < (b -> height)) && (0 <= col && col < (b -> width))) {
                 if (!((drow == 0) && (dcol == 0))) {
                     mine_num = mine_num + IS_MINE(b -> board[row][col]);
                 }
