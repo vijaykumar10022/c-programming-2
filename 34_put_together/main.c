@@ -12,6 +12,9 @@ counts_t *countFrFile(FILE *work_file, kvarray_t *kvPairs) {
     char *read_val = NULL;
     int len = 0;
     counts_t *ret_counts = createCounts();
+    if (ret_counts == NULL) {
+        return NULL;
+    }
     while (getline(&line, &size, work_file) >= 0) {
         len = strlen(line);
         if (line[len - 1] == '\n') {
@@ -27,9 +30,8 @@ counts_t *countFrFile(FILE *work_file, kvarray_t *kvPairs) {
         read_val = lookupValue(kvPairs, read_key);
         addCount(ret_counts, read_val);
     }
-    free(read_val);
-    free(read_key);
     free(line);
+    free(read_key);
     return ret_counts;
 }
 
@@ -39,6 +41,9 @@ counts_t * countFile(const char * filename, kvarray_t * kvPairs) {
         return NULL;
     }
     counts_t *ret_counts = countFrFile(work_file, kvPairs);
+    if (ret_counts == NULL) {
+        return NULL;
+    }
     fclose(work_file);
     return ret_counts;
 }
@@ -50,6 +55,10 @@ int main(int argc, char ** argv) {
     }
     //read the key/value pairs from the file named by argv[1] (call the result kv)
     kvarray_t *pairs = readKVs(argv[1]);
+    if (pairs == NULL) {
+        fprintf(stderr, "Error reading KVpairs\n");
+        return EXIT_FAILURE;
+    }
     //count from 2 to argc (call the number you count i)
     for (int i = 2; i < argc; i++) {
         //count the values that appear in the file named by argv[i], using kv as the key/value pair
