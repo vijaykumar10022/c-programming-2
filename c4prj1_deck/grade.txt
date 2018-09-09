@@ -1,10 +1,254 @@
-Grading at Sun Sep  9 15:17:15 UTC 2018
+Grading at Sun Sep  9 15:19:21 UTC 2018
 Compiling deck.c -> deck.o
-deck.c: In function ‘make_deck_exclude’:
-deck.c:92:13: error: implicit declaration of function ‘add_card_to_deck’ [-Werror=implicit-function-declaration]
-             add_card_to_deck(ret_d, temp_c);
-             ^
-cc1: all warnings being treated as errors
-Compilation of deck.c failed
+Compiling eval.c -> eval.o
+Compiling cards.c -> cards.o
+Linking eval.o, deck.o, cards.o, and our tester
+Testing free_deck(deck_t *)
+- Test passed
+Testing add_card_to(deck_t *, card_t)
+Valgrind reported errors:
+==537== Memcheck, a memory error detector
+==537== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==537== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==537== Command: ./tester act
+==537== Parent PID: 536
+==537== 
+==537== Conditional jump or move depends on uninitialised value(s)
+==537==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==537==    by 0x402250: add_card_to (in /graderhome/work/c4prj1_deck/tester)
+==537==    by 0x404292: check_add_card_to (in /graderhome/work/c4prj1_deck/tester)
+==537==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==537== 
+==537== Conditional jump or move depends on uninitialised value(s)
+==537==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==537==    by 0x402250: add_card_to (in /graderhome/work/c4prj1_deck/tester)
+==537==    by 0x404268: check_add_card_to (in /graderhome/work/c4prj1_deck/tester)
+==537==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==537== 
+==537== 
+==537== HEAP SUMMARY:
+==537==     in use at exit: 0 bytes in 0 blocks
+==537==   total heap usage: 2,696 allocs, 2,696 frees, 161,856 bytes allocated
+==537== 
+==537== All heap blocks were freed -- no leaks are possible
+==537== 
+==537== For counts of detected and suppressed errors, rerun with: -v
+==537== Use --track-origins=yes to see where uninitialised values come from
+==537== ERROR SUMMARY: 832 errors from 2 contexts (suppressed: 0 from 0)
+Testing add_empty_card(deck_t *)
+- Test passed
+Testing make_deck_exclude(deck_t *)
+Expected deck: Ks Kh Kd Kc As Ah Ad Ac 2s 2h 2d 2c 3s 3h 3d 3c 4s 4h 4d 4c 5s 5h 5d 5c 6s 6h 6d 6c 7s 7h 7d 7c 8s 8h 8d 8c 9s 9h 9d 9c 0s 0h 0d 0c Js Jh Jd Jc Qs Qh Qd Qc 
+Your deck: timeout: the monitored command dumped core
+Valgrind reported errors:
+==544== Memcheck, a memory error detector
+==544== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==544== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==544== Command: ./tester mde
+==544== Parent PID: 543
+==544== 
+==544== Conditional jump or move depends on uninitialised value(s)
+==544==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==544==    by 0x402250: add_card_to (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x4023C1: make_deck_exclude (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x40397C: check_make_deck_exclude (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==544== 
+==544== Use of uninitialised value of size 8
+==544==    at 0x402D23: check_decks_same (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x403A84: check_make_deck_exclude (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==544== 
+==544== Invalid read of size 4
+==544==    at 0x402D23: check_decks_same (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x403A84: check_make_deck_exclude (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==544==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==544== 
+==544== 
+==544== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==544==  Access not within mapped region at address 0x0
+==544==    at 0x402D23: check_decks_same (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x403A84: check_make_deck_exclude (in /graderhome/work/c4prj1_deck/tester)
+==544==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==544==  If you believe this happened as a result of a stack
+==544==  overflow in your program's main thread (unlikely but
+==544==  possible), you can try to increase the size of the
+==544==  main thread stack using the --main-stacksize= flag.
+==544==  The main thread stack size used in this run was 8388608.
+==544== 
+==544== HEAP SUMMARY:
+==544==     in use at exit: 31,168 bytes in 1,639 blocks
+==544==   total heap usage: 2,441 allocs, 802 frees, 290,240 bytes allocated
+==544== 
+==544== LEAK SUMMARY:
+==544==    definitely lost: 0 bytes in 0 blocks
+==544==    indirectly lost: 0 bytes in 0 blocks
+==544==      possibly lost: 0 bytes in 0 blocks
+==544==    still reachable: 31,168 bytes in 1,639 blocks
+==544==         suppressed: 0 bytes in 0 blocks
+==544== Rerun with --leak-check=full to see details of leaked memory
+==544== 
+==544== For counts of detected and suppressed errors, rerun with: -v
+==544== Use --track-origins=yes to see where uninitialised values come from
+==544== ERROR SUMMARY: 714 errors from 3 contexts (suppressed: 0 from 0)
+Testing build_remaining_deck(deck_t **, size_t)
+Testing with 1 hand
+Expected deck: timeout: the monitored command dumped core
+Valgrind reported errors:
+==548== Memcheck, a memory error detector
+==548== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==548== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==548== Command: ./tester brd
+==548== Parent PID: 547
+==548== 
+==548== Conditional jump or move depends on uninitialised value(s)
+==548==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==548==    by 0x402250: add_card_to (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x402484: build_remaining_deck (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x4035DC: check_build_remaining_deck (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==548== 
+==548== Conditional jump or move depends on uninitialised value(s)
+==548==    at 0x4C2FD0C: realloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==548==    by 0x402250: add_card_to (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x4023C1: make_deck_exclude (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x4024B6: build_remaining_deck (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x4035DC: check_build_remaining_deck (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==548== 
+==548== Use of uninitialised value of size 8
+==548==    at 0x402C6C: check_decks_same (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x403710: check_build_remaining_deck (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==548== 
+==548== Invalid read of size 4
+==548==    at 0x402C6C: check_decks_same (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x403710: check_build_remaining_deck (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==548==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==548== 
+==548== 
+==548== Process terminating with default action of signal 11 (SIGSEGV): dumping core
+==548==  Access not within mapped region at address 0x0
+==548==    at 0x402C6C: check_decks_same (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x403710: check_build_remaining_deck (in /graderhome/work/c4prj1_deck/tester)
+==548==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==548==  If you believe this happened as a result of a stack
+==548==  overflow in your program's main thread (unlikely but
+==548==  possible), you can try to increase the size of the
+==548==  main thread stack using the --main-stacksize= flag.
+==548==  The main thread stack size used in this run was 8388608.
+==548== 
+==548== HEAP SUMMARY:
+==548==     in use at exit: 2,184 bytes in 117 blocks
+==548==   total heap usage: 171 allocs, 54 frees, 26,712 bytes allocated
+==548== 
+==548== LEAK SUMMARY:
+==548==    definitely lost: 16 bytes in 1 blocks
+==548==    indirectly lost: 16 bytes in 2 blocks
+==548==      possibly lost: 0 bytes in 0 blocks
+==548==    still reachable: 2,152 bytes in 114 blocks
+==548==         suppressed: 0 bytes in 0 blocks
+==548== Rerun with --leak-check=full to see details of leaked memory
+==548== 
+==548== For counts of detected and suppressed errors, rerun with: -v
+==548== Use --track-origins=yes to see where uninitialised values come from
+==548== ERROR SUMMARY: 54 errors from 4 contexts (suppressed: 0 from 0)
+Testing get_match_count(deck_t *)
+In this hand: Ac 
+  I expected the 0'th match count to be 1 but you got 0
+In this hand: Ac Ah 
+  I expected the 0'th match count to be 2 but you got 0
+  I expected the 1'th match count to be 2 but you got 0
+In this hand: Ac Ah Kc 
+  I expected the 2'th match count to be 1 but you got 0
+In this hand: Ac Ah Kc Qs 
+  I expected the 3'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Qs 
+  I expected the 4'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Qs 
+  I expected the 5'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Qh Qs 
+  I expected the 5'th match count to be 2 but you got 0
+  I expected the 6'th match count to be 2 but you got 0
+In this hand: Ac Ad Ah Kc Kd Qh Qs 0s 
+  I expected the 7'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Qh Qs 0s 9c 
+  I expected the 8'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Qd Qh Qs 0s 9c 
+  I expected the 9'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Ks Qd Qh Qs 0s 9c 
+  I expected the 10'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Ks Qd Qh Qs 0d 0s 9c 
+  I expected the 11'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Ks Qd Qh Qs 0d 0s 9c 9h 
+  I expected the 11'th match count to be 2 but you got 0
+  I expected the 12'th match count to be 2 but you got 0
+In this hand: Ac Ad Ah Kc Kd Ks Qd Qh Qs 0d 0s 9c 9h 7s 
+  I expected the 13'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Ks Qd Qh Qs 0d 0s 9c 9h 7s 6h 
+  I expected the 14'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah Kc Kd Ks Qd Qh Qs 0d 0s 9c 9h 7h 7s 6h 
+  I expected the 15'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah As Kc Kd Ks Qd Qh Qs 0d 0s 9c 9h 7h 7s 6h 
+  I expected the 16'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah As Kc Kd Ks Qd Qh Qs 0d 0s 9c 9h 7h 7s 6h 4d 
+  I expected the 17'th match count to be 1 but you got 0
+In this hand: Ac Ad Ah As Kc Kd Ks Qd Qh Qs 0d 0s 9c 9h 9s 7h 7s 6h 4d 
+  I expected the 18'th match count to be 1 but you got 0
+Valgrind reported errors:
+==552== Memcheck, a memory error detector
+==552== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==552== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==552== Command: ./tester gmc
+==552== Parent PID: 551
+==552== 
+==552== Conditional jump or move depends on uninitialised value(s)
+==552==    at 0x40323B: check_get_match_count (in /graderhome/work/c4prj1_deck/tester)
+==552==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==552== 
+==552== Use of uninitialised value of size 8
+==552==    at 0x4E8476B: _itoa_word (_itoa.c:179)
+==552==    by 0x4E8812C: vfprintf (vfprintf.c:1631)
+==552==    by 0x4F509AE: __printf_chk (printf_chk.c:35)
+==552==    by 0x403219: check_get_match_count (in /graderhome/work/c4prj1_deck/tester)
+==552==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==552== 
+==552== Conditional jump or move depends on uninitialised value(s)
+==552==    at 0x4E84775: _itoa_word (_itoa.c:179)
+==552==    by 0x4E8812C: vfprintf (vfprintf.c:1631)
+==552==    by 0x4F509AE: __printf_chk (printf_chk.c:35)
+==552==    by 0x403219: check_get_match_count (in /graderhome/work/c4prj1_deck/tester)
+==552==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==552== 
+==552== Conditional jump or move depends on uninitialised value(s)
+==552==    at 0x4E881AF: vfprintf (vfprintf.c:1631)
+==552==    by 0x4F509AE: __printf_chk (printf_chk.c:35)
+==552==    by 0x403219: check_get_match_count (in /graderhome/work/c4prj1_deck/tester)
+==552==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==552== 
+==552== Conditional jump or move depends on uninitialised value(s)
+==552==    at 0x4E87C59: vfprintf (vfprintf.c:1631)
+==552==    by 0x4F509AE: __printf_chk (printf_chk.c:35)
+==552==    by 0x403219: check_get_match_count (in /graderhome/work/c4prj1_deck/tester)
+==552==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==552== 
+==552== Conditional jump or move depends on uninitialised value(s)
+==552==    at 0x4E87CE2: vfprintf (vfprintf.c:1631)
+==552==    by 0x4F509AE: __printf_chk (printf_chk.c:35)
+==552==    by 0x403219: check_get_match_count (in /graderhome/work/c4prj1_deck/tester)
+==552==    by 0x400A28: main (in /graderhome/work/c4prj1_deck/tester)
+==552== 
+==552== 
+==552== HEAP SUMMARY:
+==552==     in use at exit: 0 bytes in 0 blocks
+==552==   total heap usage: 117 allocs, 117 frees, 8,992 bytes allocated
+==552== 
+==552== All heap blocks were freed -- no leaks are possible
+==552== 
+==552== For counts of detected and suppressed errors, rerun with: -v
+==552== Use --track-origins=yes to see where uninitialised values come from
+==552== ERROR SUMMARY: 132 errors from 6 contexts (suppressed: 0 from 0)
 
 Overall Grade: F
