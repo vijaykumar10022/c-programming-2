@@ -89,7 +89,7 @@ deck_t* make_deck_exclude(deck_t * excluded_cards) {
         cond = deck_contains(excluded_cards, temp_c);
         if (cond == 0) {
             ret_d->n_cards++;
-            add_card_to_deck(ret_d, temp_c);
+            add_card_to(ret_d, temp_c);
         }
     }
     return ret_d;
@@ -107,7 +107,7 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
             temp_c = temp_h->cards[j];
             if (temp_c->value != 0) {
                 if (deck_contains(no_ret_d, *temp_c) == 0) {
-                    add_card_to_deck(no_ret_d, *temp_c);
+                    add_card_to(no_ret_d, *temp_c);
                 }
             }
         }
