@@ -327,10 +327,11 @@ unsigned * get_match_counts(deck_t * hand) {
     if (ret_array == NULL) {
         return NULL;
     }
-    cards **d_cards = hand->cards;
+    card_t **d_cards = hand->cards;
     unsigned cur_val = d_cards[0]->value;
     size_t st_idx = 0;
     unsigned count = 0;
+    card_t *card_p;
     for (size_t i = 0; i < hand->n_cards; i++) {
         card_p = d_cards[i];
         if (card_p->value == cur_val) {
