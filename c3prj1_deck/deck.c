@@ -88,7 +88,6 @@ deck_t* make_deck_exclude(deck_t * excluded_cards) {
         temp_c = card_from_num(i);
         cond = deck_contains(excluded_cards, temp_c);
         if (cond == 0) {
-            ret_d->n_cards++;
             add_card_to(ret_d, temp_c);
         }
     }

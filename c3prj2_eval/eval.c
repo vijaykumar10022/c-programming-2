@@ -346,6 +346,9 @@ unsigned * get_match_counts(deck_t * hand) {
             count = 1;
         }
     }
+    for (size_t j = st_idx; j < hand->n_cards; j++) {
+                ret_array[j] = count;
+    }
     return ret_array;
 }
 
