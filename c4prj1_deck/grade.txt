@@ -1,0 +1,62 @@
+Grading at Sun Sep  9 14:44:40 UTC 2018
+Compiling deck.c -> deck.o
+deck.c: In function ‘add_card_to_deck’:
+deck.c:65:45: error: passing argument 1 of ‘malloc’ makes integer from pointer without a cast [-Werror=int-conversion]
+     deck->cards[deck->n_cards - 1] = malloc(deck->cards[deck->n_cards - 1], sizeof(*(deck->cards[deck->n_cards - 1])))
+                                             ^
+In file included from deck.c:2:0:
+/usr/include/stdlib.h:466:14: note: expected ‘size_t {aka long unsigned int}’ but argument is of type ‘card_t * {aka struct card_tag *}’
+ extern void *malloc (size_t __size) __THROW __attribute_malloc__ __wur;
+              ^
+deck.c:65:38: error: too many arguments to function ‘malloc’
+     deck->cards[deck->n_cards - 1] = malloc(deck->cards[deck->n_cards - 1], sizeof(*(deck->cards[deck->n_cards - 1])))
+                                      ^
+deck.c:66:5: error: expected ‘;’ before ‘deck’
+     deck->cards[deck->n_cards - 1]->suit = c.suits;
+     ^
+deck.c:67:35: error: ‘card_t {aka struct card_tag}’ has no member named ‘rank’
+     deck->cards[deck->n_cards - 1]->rank = c.rank;
+                                   ^
+deck.c:67:45: error: ‘card_t {aka struct card_tag}’ has no member named ‘rank’
+     deck->cards[deck->n_cards - 1]->rank = c.rank;
+                                             ^
+deck.c: In function ‘add_empty_card’:
+deck.c:73:11: error: ‘card_t {aka struct card_tag}’ has no member named ‘rank’
+     temp_c->rank = 0;
+           ^
+deck.c: In function ‘make_deck_exclude’:
+deck.c:88:9: error: ‘temp_c’ undeclared (first use in this function)
+         temp_c = card_from_num(i);
+         ^
+deck.c:88:9: note: each undeclared identifier is reported only once for each function it appears in
+deck.c:89:30: error: ‘exclude_cards’ undeclared (first use in this function)
+         cond = deck_contains(exclude_cards, temp_c);
+                              ^
+deck.c:90:13: error: ‘cons’ undeclared (first use in this function)
+         if (cons == 0) {
+             ^
+deck.c:85:9: error: variable ‘cond’ set but not used [-Werror=unused-but-set-variable]
+     int cond;
+         ^
+deck.c:81:12: error: unused variable ‘temp_card’ [-Werror=unused-variable]
+     card_t temp_card;
+            ^
+deck.c: In function ‘build_remaining_deck’:
+deck.c:100:5: error: ‘no_ret_d’ undeclared (first use in this function)
+     no_ret_d->n_cards = 0;
+     ^
+deck.c:99:13: error: unused variable ‘ret_d’ [-Werror=unused-variable]
+     deck_t *ret_d;
+             ^
+deck.c: In function ‘make_deck_exclude’:
+deck.c:95:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+deck.c: In function ‘build_remaining_deck’:
+deck.c:115:1: error: control reaches end of non-void function [-Werror=return-type]
+ }
+ ^
+cc1: all warnings being treated as errors
+Compilation of deck.c failed
+
+Overall Grade: F
