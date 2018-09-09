@@ -1,12 +1,10 @@
-Grading at Sun Sep  9 15:14:45 UTC 2018
+Grading at Sun Sep  9 15:17:15 UTC 2018
 Compiling deck.c -> deck.o
-Compiling eval.c -> eval.o
-Compiling cards.c -> cards.o
-Linking eval.o, deck.o, cards.o, and our tester
-tester.o: In function `check_add_card_to':
-c4p1-tester.c:(.text+0x1a35): undefined reference to `add_card_to'
-c4p1-tester.c:(.text+0x1a5f): undefined reference to `add_card_to'
-collect2: error: ld returned 1 exit status
-Linking failed
+deck.c: In function ‘make_deck_exclude’:
+deck.c:92:13: error: implicit declaration of function ‘add_card_to_deck’ [-Werror=implicit-function-declaration]
+             add_card_to_deck(ret_d, temp_c);
+             ^
+cc1: all warnings being treated as errors
+Compilation of deck.c failed
 
 Overall Grade: F
