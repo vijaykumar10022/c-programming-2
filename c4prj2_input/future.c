@@ -35,6 +35,9 @@ void future_cards_from_deck(deck_t * deck, future_cards_t * fc) {
         fprintf(stderr, "Null future cards");
         //return;
     }
+    if (fc->n_decks > deck->n_cards) {
+        fprintf(stderr, "Not enough cards in deck");
+    }
     deck_t d;
     card_t *c;
     for (size_t i = 0; i < fc->n_decks; i++) {
