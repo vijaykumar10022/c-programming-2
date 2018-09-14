@@ -44,8 +44,6 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
             }
             count++;
             if (c_name[0] == '?') {
-                c_name = (char *)realloc(c_name, (c_count + 1)*sizeof(*c_name));
-                c_name[c_count] = '\0';
                 idx = strToInt(c_name + 1);
                 add_card = add_empty_card(ret_d);
                 add_future_card(fc, idx, add_card);
