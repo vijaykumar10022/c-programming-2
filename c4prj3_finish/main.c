@@ -88,7 +88,7 @@ int main(int argc, char ** argv) {
         actScore(hands, n_hands, win_arr);
     }
     for (size_t h = 0; h < n_hands; h++) {
-        printf("Hand %zu won %u / %u times (%.2f%%)\n", h, win_arr[h], n_trials, (float)win_arr[h]/(float)n_trials);
+        printf("Hand %zu won %u / %u times (%.2f%%)\n", h, win_arr[h], n_trials, 100*(float)win_arr[h]/(float)n_trials);
     }
     printf("And there were %u ties\n", win_arr[n_hands]);
     freeAll(fc, hands, n_hands, rem_cards, win_arr);
