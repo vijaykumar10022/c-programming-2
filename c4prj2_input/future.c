@@ -10,7 +10,7 @@
 void add_future_card(future_cards_t * fc, size_t index, card_t * ptr) {
     size_t or_size = 0;
     if (fc == NULL) {
-        fc = (future_cards_t *)malloc(sizeof(*fc));
+        fc = (future_cards_t *)realloc(fc, sizeof(*fc));
         fc->decks = NULL;
         fc->n_decks = 0;
     }
