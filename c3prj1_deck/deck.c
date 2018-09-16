@@ -98,6 +98,7 @@ deck_t* make_deck_exclude(deck_t * excluded_cards) {
 deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
     deck_t *temp_h;
     deck_t *no_ret_d = malloc(sizeof(*no_ret_d));
+    deck_t *ret_d;
     no_ret_d->n_cards = 0;
     no_ret_d->cards = NULL;
     card_t *temp_c;
@@ -112,7 +113,9 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
             }
         }
     }
-    return make_deck_exclude(no_ret_d);
+    ret_d = make_deck_exclude(no_ret_d);
+    free_deck(no_ret_d);
+    return ret_d;
 }
 
 void free_deck(deck_t * deck) {
