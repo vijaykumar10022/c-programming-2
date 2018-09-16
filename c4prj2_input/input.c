@@ -76,35 +76,6 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
         }
     }
 
-//    do {
-//        if (str[g_count] == ' ' || str[g_count] == '\0') {
-//            if (c_name != NULL) {
-//                if (strlen(c_name) < 2) {
-//                    break;
-//                }
-//            }
-//            count++;
-//            if (c_name[0] == '?') {
-//                idx = strToInt(c_name + 1);
-//                add_card = add_empty_card(ret_d);
-//                add_future_card(fc, idx, add_card);
-//                c_count = 0;
-//            }
-//            else {
-//                add_card_to(ret_d, card_from_letters(c_name[0], c_name[1]));
-//                c_count = 0;
-//            }
-//        }
-//        else {
-//            c_count++;
-//            c_name = (char *)realloc(c_name, (c_count + 1)*sizeof(*c_name));
-//            c_name[c_count - 1] = str[g_count];
-//            c_name[c_count] = '\0';
-//        }
-//        g_count++;
-//    }
-//    while (str[g_count - 1] != '\0');
-
     free(c_name);
     if (count < 5) {
         fprintf(stderr, "Not enough cards");
