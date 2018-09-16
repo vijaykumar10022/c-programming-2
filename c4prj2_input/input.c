@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "input.h"
 
 size_t strToInt(char *str) {
@@ -24,45 +25,85 @@ void lineToStr(char *line) {
     }
 }
 
+int getLastIndex(const char *str, int fstIdx) {
+    char c = str[fstIdx];
+    int count = 0;
+    while (isalpha(c) || isdigit(c) || (c == '?')) {
+        count++;
+        c = str[fstIdx + count];
+    }
+    if (count <= 1) {
+        return -1;
+    }
+    return fstIdx + count;
+}
 
 deck_t * hand_from_string(const char * str, future_cards_t * fc) {
     char *c_name = NULL;
     int count = 0;
-    int c_count = 0;
+    int lstIdx = 0;
+//    int c_count = 0;
     int g_count = 0;
     size_t idx = 0;
     card_t *add_card;
     deck_t *ret_d = (deck_t *)malloc(sizeof(*ret_d));
     ret_d->n_cards = 0;
     ret_d->cards = NULL;
-    do {
-        if (str[g_count] == ' ' || str[g_count] == '\0') {
-            if (c_name != NULL) {
-                if (strlen(c_name) < 2) {
-                    break;
-                }
-            }
+    
+    while (str[count] != '\0') {
+        if (!isalpha(str[count]) && !isdigit(str[count]) && (str[count] != '?')) {
             count++;
-            if (c_name[0] == '?') {
+        }
+        else {
+            lstIdx = getLastIndex(str, count);
+            if (lstIdx == -1) {
+                return NULL;
+            }
+            if (str[count] == '?') {
+                c_name = (char *)realloc(c_name, (lstIdx - count + 1)*sizeof(*c_name));
+                c_name = strncpy(c_name, str + count, (size_t)(lstIdx - count));
+                c_name[lstIdx - count] = '\0';
                 idx = strToInt(c_name + 1);
                 add_card = add_empty_card(ret_d);
                 add_future_card(fc, idx, add_card);
-                c_count = 0;
+                count = lstIdx;
             }
             else {
-                add_card_to(ret_d, card_from_letters(c_name[0], c_name[1]));
-                c_count = 0;
+                add_card_to(ret_d, card_from_letters(str[count], str[count + 1]));
+                count += 2;
             }
+            g_count++;
         }
-        else {
-            c_count++;
-            c_name = (char *)realloc(c_name, (c_count + 1)*sizeof(*c_name));
-            c_name[c_count - 1] = str[g_count];
-            c_name[c_count] = '\0';
-        }
-        g_count++;
     }
-    while (str[g_count - 1] != '\0');
+
+//    do {
+//        if (str[g_count] == ' ' || str[g_count] == '\0') {
+//            if (c_name != NULL) {
+//                if (strlen(c_name) < 2) {
+//                    break;
+//                }
+//            }
+//            count++;
+//            if (c_name[0] == '?') {
+//                idx = strToInt(c_name + 1);
+//                add_card = add_empty_card(ret_d);
+//                add_future_card(fc, idx, add_card);
+//                c_count = 0;
+//            }
+//            else {
+//                add_card_to(ret_d, card_from_letters(c_name[0], c_name[1]));
+//                c_count = 0;
+//            }
+//        }
+//        else {
+//            c_count++;
+//            c_name = (char *)realloc(c_name, (c_count + 1)*sizeof(*c_name));
+//            c_name[c_count - 1] = str[g_count];
+//            c_name[c_count] = '\0';
+//        }
+//        g_count++;
+//    }
+//    while (str[g_count - 1] != '\0');
 
     free(c_name);
     if (count < 5) {
